@@ -45,13 +45,13 @@ INFO:pypykatz:Parsing file dump.bin
 [+] Successfully converted memory dump into json!
 [-] No username or domain found, skipping... 
 {'cardinfo': None, 'credtype': 'kerberos', 'domainname': '', 'luid': 997, 'password': None, 'password_raw': '', 'pin': None, 'pin_raw': None, 'tickets': [], 'username': ''}
-[*] ClearKatz tried to guess which credentials were associated to (['NOAH@DESKTOP-2QJTF78', 'NOAH@.']), to prevent that behaviour use the --no-guessing switch.
+[*] ClearKatz tried to guess which credentials were associated to (['NOAH@DESKTOP-XYZ', 'NOAH@.']), to prevent that behaviour use the --no-guessing switch.
 
 [*] Domain information
     Domain Name: None
     Domain alias: WORKGROUP
 
-[+] DESKTOP-2QJTF78$@WORKGROUP
+[+] DESKTOP-XYZ$@WORKGROUP
     Password: None
     NTLM: None
     AES256: None
@@ -61,7 +61,7 @@ INFO:pypykatz:Parsing file dump.bin
     NTLM: None
     AES256: None
 
-[+] NOAH@DESKTOP-2QJTF78
+[+] NOAH@DESKTOP-XYZ
     Password: None
     NTLM: 7facdc498ed1680c4fd1448319a8c04f
     AES256: None
