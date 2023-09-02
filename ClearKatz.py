@@ -103,7 +103,7 @@ class ClearKatz:
 			bp.print_w(f"{tab}Password: {creds[account_name]['PASSWORD']}")
 			if args.raw:
 				bp.print_w(f"{tab}Password (Raw): {creds[account_name]['PASSWORD_RAW']}")
-			bp.print_w(f"{tab}NTLM: {creds[account_name]['NTLM']}")
+			bp.print_w(f"{tab}NT: {creds[account_name]['NT']}")
 			bp.print_w(f"{tab}AES256: {creds[account_name]['AES256']}\n")
 		if args.dpapi:
 			bp.print_b("DPAPI Keys (guid: masterkey):")
@@ -146,7 +146,7 @@ class ClearKatz:
 				for k in unique_account[account]:
 					self.data['creds'][kept]['PASSWORD'] = self.data['creds'][k]['PASSWORD'] if self.data['creds'][k]['PASSWORD'] != None else self.data['creds'][kept]['PASSWORD']
 					self.data['creds'][kept]['PASSWORD_RAW'] = self.data['creds'][k]['PASSWORD_RAW'] if self.data['creds'][k]['PASSWORD_RAW'] != None else self.data['creds'][kept]['PASSWORD_RAW']
-					self.data['creds'][kept]['NTLM'] = self.data['creds'][k]['NTLM'] if self.data['creds'][k]['NTLM'] != None else creds[kept]['NTLM']
+					self.data['creds'][kept]['NT'] = self.data['creds'][k]['NT'] if self.data['creds'][k]['NT'] != None else creds[kept]['NT']
 					self.data['creds'][kept]['AES256'] = self.data['creds'][k]['AES256'] if self.data['creds'][k]['AES256'] != None else self.data['creds'][kept]['AES256']
 					# Delete the other one
 					self.data['creds'].pop(k)
@@ -209,7 +209,7 @@ class ClearKatz:
 		fullname = username + "@" + domain
 
 		if self.data['creds'].get(fullname) == None:
-			self.data['creds'][fullname] = {'AES256': None, 'NTLM': None, "PASSWORD": None, "PASSWORD_RAW":None}
+			self.data['creds'][fullname] = {'AES256': None, 'NT': None, "PASSWORD": None, "PASSWORD_RAW":None}
 
 		self.data['creds'][fullname]['PASSWORD'] = lsass_json['password'] if lsass_json['password'] not in ("", None) else self.data['creds'][fullname]['PASSWORD']
 		self.data['creds'][fullname]['PASSWORD_RAW'] = lsass_json['password_raw'] if lsass_json['password_raw'] not in ("", None) else self.data['creds'][fullname]['PASSWORD_RAW']
@@ -225,7 +225,7 @@ class ClearKatz:
 		fullname = username + "@" + domain
 
 		if self.data['creds'].get(fullname) == None:
-			self.data['creds'][fullname] = {'AES256': None, 'NTLM': None, "PASSWORD": None, "PASSWORD_RAW":None}
+			self.data['creds'][fullname] = {'AES256': None, 'NT': None, "PASSWORD": None, "PASSWORD_RAW":None}
 
 		self.data['creds'][fullname]['PASSWORD'] = lsass_json['password'] if lsass_json['password'] not in ("", None) else self.data['creds'][fullname]['PASSWORD']
 		self.data['creds'][fullname]['PASSWORD_RAW'] = lsass_json['password_raw'] if lsass_json['password_raw'] not in ("", None) else self.data['creds'][fullname]['PASSWORD_RAW']
@@ -243,9 +243,9 @@ class ClearKatz:
 		fullname = username + "@" + domain
 
 		if self.data['creds'].get(fullname) == None:
-			self.data['creds'][fullname] = {'AES256': None, 'NTLM': None, "PASSWORD": None, "PASSWORD_RAW":None}
+			self.data['creds'][fullname] = {'AES256': None, 'NT': None, "PASSWORD": None, "PASSWORD_RAW":None}
 
-		self.data['creds'][fullname]['NTLM'] = lsass_json['NThash'] if lsass_json['NThash'] not in ("", None) else self.data['creds'][fullname]
+		self.data['creds'][fullname]['NT'] = lsass_json['NThash'] if lsass_json['NThash'] not in ("", None) else self.data['creds'][fullname]
 		return
 
 	def kerberos_creds(self, lsass_json):
@@ -260,7 +260,7 @@ class ClearKatz:
 		fullname = username + "@" + domain
 
 		if self.data['creds'].get(fullname) == None:
-			self.data['creds'][fullname] = {'AES256': None, 'NTLM': None, "PASSWORD": None, "PASSWORD_RAW":None}
+			self.data['creds'][fullname] = {'AES256': None, 'NT': None, "PASSWORD": None, "PASSWORD_RAW":None}
 
 		if len(lsass_json['tickets']) > 1:
 			self.data['creds'][fullname]['AES256'] = lsass_json['tickets']['Key'] if lsass_json['tickets']['Key'] not in ("", None) else self.data['creds'][fullname]['AES256']
